@@ -6,7 +6,7 @@ import useToken from "../page/useToken";
 
 function logout() {
     sessionStorage.removeItem("token");
-    window.location.replace("http://localhost:3000/Signin");
+    window.location.replace("https://ea-project-frontend.vercel.app/Signin");
   }
 function Navbar() {
   const { token, setToken } = useToken();
