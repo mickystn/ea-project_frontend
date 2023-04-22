@@ -5,7 +5,7 @@ import { useState,useEffect } from "react";
 import Axios from "axios";
 
 
-function port(){
+function Rort(){
     const [allport,setAllport]=useState([]);
 
 
@@ -22,4 +22,4 @@ function port(){
     )
 }
 
-export default port;
+export default Rort;
