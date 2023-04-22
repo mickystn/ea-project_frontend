@@ -2,6 +2,7 @@
 import React from "react";
 import tradindimg from "../../img/6240057.jpg";
 import { Link } from "react-router-dom";
+import { Button } from 'antd';
 
 function ContentBoxEa(){
     return(
@@ -22,9 +23,9 @@ function ContentBoxEa(){
                       หรือหุ่นยนต์ที่ทำการซื้อ-ขายแทนเราได้อย่างเหมาะสม
                       ช่วยให้ผู้เทรดไม่พลาดโอกาสที่ดีในการเทรดและทำกำไรอย่างมีประสิทธิภาพ
                     </p>
-                    <Link to="/ArticleEa"> <button size="large" className="seemorebtn" type="primary"  >
+                    <Link to="/ArticleEa"> <Button size="large" className="seemorebtn" type="primary"  >
                       อ่านเพิ่มเติม
-                    </button></Link>
+                    </Button></Link>
                     
                   </div>
 

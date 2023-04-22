@@ -33,20 +33,42 @@ function Dashbord() {
   return (
     <div>
       <Navbar></Navbar>
+      <div className="landingpage_dashbord"> 
+      <div className="container"> 
+        <main>
+          <div className="recent-orders"> 
+          <Button className ="btn" type="primary" size={"small"} onClick={addUser} >add user</Button>
+          <table className="tables">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>NAME</th>
+                <th className="mail-hidden">EMAIL</th>
+              </tr>
+            </thead>
 
-      <Button className ="btn" type="primary" size={"small"} onClick={addUser} >add user</Button>
+            <tbody>
+            {user.map((val) => {
+                    return (
+                      <tr>
+                        <td>{val.user_id}</td>
+                        <td>{val.user_name}</td>
+                        <td>{val.email}</td>
+                        <td>
+                          <Link className="warning" to="/Dashbord/port" state={{id:val.user_id}}>Show port</Link>
+                        </td>
+                      </tr>
+                    )
+                  })}
+            </tbody>
+            </table>
+          </div>
+        </main>
+
+      </div>
+      </div>
+
       
-      {user.map((val) => {
-        return (
-          <tr>
-            <td>{val.user_id}</td>
-            <td>{val.user_name}</td>
-            <td>{val.email}</td>
-            
-            <Link to="/Dashbord/port" state={{id:val.user_id}}>Show port</Link>
-          </tr>
-        )
-      })}
     </div>
   );
 }
