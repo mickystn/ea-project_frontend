@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.de7a8e28.css",
+    "main.js": "/static/js/main.ef7f35ab.js",
+    "static/js/787.cda612ba.chunk.js": "/static/js/787.cda612ba.chunk.js",
+    "static/media/imgforrex_optimized.png": "/static/media/imgforrex_optimized.81a78057a5960ae66b75.png",
+    "static/media/6240057.jpg": "/static/media/6240057.27c5ae5258171262d34d.jpg",
+    "static/media/Investment data-amico.png": "/static/media/Investment data-amico.1375dd0d498baa1733c3.png",
+    "static/media/Computerlogin-amico.png": "/static/media/Computerlogin-amico.48c92c3fc55fe12dbf31.png",
+    "static/media/time-management.png": "/static/media/time-management.4b914ee2a58e683d57c2.png",
+    "static/media/stock-market.png": "/static/media/stock-market.2479c52db44284796f99.png",
+    "static/media/candlestick-chart.png": "/static/media/candlestick-chart.72646dfdf46fde7f507d.png",
+    "static/media/study.png": "/static/media/study.44de5f26e45e55f032aa.png",
+    "static/media/LOGO.png": "/static/media/LOGO.bb8e5b3c22d324c0b2ee.png",
+    "static/media/broker.png": "/static/media/broker.7d0e14e6e4cc3c7c4d80.png",
+    "static/media/expense.png": "/static/media/expense.eb32216e9962af22fae8.png",
+    "static/media/line.png": "/static/media/line.a48f527b96be0324dd29.png",
+    "static/media/facebook.png": "/static/media/facebook.11847e03ada611eb2580.png",
+    "index.html": "/index.html",
+    "main.de7a8e28.css.map": "/static/css/main.de7a8e28.css.map",
+    "main.ef7f35ab.js.map": "/static/js/main.ef7f35ab.js.map",
+    "787.cda612ba.chunk.js.map": "/static/js/787.cda612ba.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.de7a8e28.css",
+    "static/js/main.ef7f35ab.js"
+  ]
+}
