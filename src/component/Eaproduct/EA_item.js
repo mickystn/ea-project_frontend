@@ -3,7 +3,7 @@ import { DownloadOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import { useState } from "react";
 
-const ZIP_FILE_URL = "http://13.215.153.220:3000/EA-file.zip";
+const ZIP_FILE_URL = "https://ea-project-frontend.vercel.app/EA-file.zip";
 
 function Eaitem() {
   const [modal2Open, setModal2Open] = useState(false);

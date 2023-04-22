@@ -8,11 +8,11 @@ import { useState } from "react";
 import useToken from "../../page/useToken";
 import { useNavigate } from "react-router-dom";
 
-const ZIP_FILE_CADCHF_26_50 = "http://13.215.153.220:3000/mickey_CADCHF_26_50.zip";
-const ZIP_FILE_EURAUD_50_100 = "http://13.215.153.220:3000/mickey_EURAUD_50_100.zip";
-const ZIP_FILE_GBPNZD_6_20_001 = "http://13.215.153.220:3000/mickey_GBPNZD_6_20_001.zip";
-const ZIP_FILE_GBPNZD_30_105_005 = "http://13.215.153.220:3000/mickey_GBPNZD_30_105_005.zip";
-const ZIP_FILE_GOLD_50_200 = "http://13.215.153.220:3000/mickey_GOLD_50_200.zip";
+const ZIP_FILE_CADCHF_26_50 = "https://ea-project-frontend.vercel.app/mickey_CADCHF_26_50.zip";
+const ZIP_FILE_EURAUD_50_100 = "https://ea-project-frontend.vercel.app/mickey_EURAUD_50_100.zip";
+const ZIP_FILE_GBPNZD_6_20_001 = "https://ea-project-frontend.vercel.app/mickey_GBPNZD_6_20_001.zip";
+const ZIP_FILE_GBPNZD_30_105_005 = "https://ea-project-frontend.vercel.app/mickey_GBPNZD_30_105_005.zip";
+const ZIP_FILE_GOLD_50_200 = "https://ea-project-frontend.vercel.app/mickey_GOLD_50_200.zip";
 
 
 function Settingitem() {
