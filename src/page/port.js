@@ -11,11 +11,8 @@ import { message } from "antd";
 
 
 function port(){
-    const [userid,setUserid]=useState(34);
 
-    const [allport,setAllport]=useState([]);
-
-    const [addFrom,setAddfrom]=useState("");
+    const [addFrom,setAddfrom]=useState();
 
     return (
         <div>
