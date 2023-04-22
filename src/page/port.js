@@ -36,7 +36,6 @@ function port(){
         await Axios.delete(`https://api-ea.vercel.app/deleteOneport/${port}`).then((res) => {
             console.log(res);
         });
-        window.location.reload();
     }
 
     async function addPort(){
@@ -50,7 +49,6 @@ function port(){
                 message.error("This port number already exists.");
             }
         });
-        window.location.reload();
     }
     function onChangePort(evt){
         setAddfrom(evt.target.value);
