@@ -11,7 +11,18 @@ import { message } from "antd";
 
 
 function port(){
-    
+    const [userid,setUserid]=useState(34);
+
+    const [allport,setAllport]=useState([]);
+
+    const [addFrom,setAddfrom]=useState("");
+
+    useEffect(()=>{
+        Axios.get(`https://api-ea.vercel.app/allport`).then((res)=>{
+            setAllport(res.data);
+        })
+    },[])
+
     return (
         <div>
             <h>test</h>
