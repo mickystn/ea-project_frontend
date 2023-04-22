@@ -7,13 +7,11 @@ import Navbar from "../component/navbar";
 import Axios from "axios";
 import { Link,useNavigate,createSearchParams } from "react-router-dom";
 
-import { useLocation } from "react-router-dom";
 import { message } from "antd";
 
 
 function port(){
-    const location = useLocation();
-    const [userid,setUserid]=useState(location.state.id);
+    const [userid,setUserid]=useState(34);
 
     const [allport,setAllport]=useState([]);
 
