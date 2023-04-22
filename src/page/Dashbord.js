@@ -10,12 +10,18 @@ import { Link,useNavigate,createSearchParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { message } from "antd";
 
+import useToken from "./useToken";
+
 
 function Dashbord() {
+    const { token, setToken } = useToken();
+
   const [user,setUser]=useState([]);
   const [addFrom,setAddfrom]=useState("");
   const navigate=useNavigate();
-
+  if(!token) {
+    window.location.replace("https://ea-project-frontend.vercel.app/Signin");
+  }
   useEffect(()=>{
     Axios.get("https://api-ea.vercel.app/user").then((res)=>{
         setUser(res.data);
@@ -43,7 +49,7 @@ function Dashbord() {
               <tr>
                 <th>ID</th>
                 <th>NAME</th>
-                <th className="mail-hidden">EMAIL</th>
+                <th >EMAIL</th>
               </tr>
             </thead>
 

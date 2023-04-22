@@ -1,5 +1,6 @@
 import "../css/home.css";
 import "../css/dashbord.css";
+import "../css/transaction.css"
 import { LineChart, Line, XAxis, YAxis, CartesianGrid ,Legend} from "recharts";
 import { useState,useEffect } from "react";
 import Navbar from "../component/navbar";
@@ -154,34 +155,58 @@ function Transaction(){
     }
     return (
         <div>
-            
             <Navbar></Navbar>
-            <div className="chart-info">
-                <div className="btnPlotgraph">
-                <Button className ="btn" type="primary" size={"small"} onClick={()=>{setGraphval("profit")}}>
-                Profit
-                </Button>
-                <Button className ="btn"  type="primary" size={"small"}  onClick={()=>{setGraphval("equity")}}>
-                Equity/Balance
-                </Button>
+            <div className="landingpage_dashbord"> 
+                <div className="container"> 
+                    <main>
+                    <div className="recent-orders"> 
+                        <div className="chart-info">
+                            <div className="btnPlotgraph">
+                            <Button className ="btn" type="primary" size={"small"} onClick={()=>{setGraphval("profit")}}>
+                            Profit
+                            </Button>
+                            <Button className ="btn"  type="primary" size={"small"}  onClick={()=>{setGraphval("equity")}}>
+                            Equity/Balance
+                            </Button>
+                            </div>
+                            {getLine()}
+                        </div>
+
+                        <DatePicker className="DatePicker"format="YYYY-MM-DD" value={startValue} placeholder="Start" onChange={setStartValue}/>
+                        <DatePicker className="DatePicker" format="YYYY-MM-DD" value={endValue} placeholder="End" onChange={setEndValue} />
+
+                        <table className="tables">
+                                <thead>
+                                <tr>
+                                    <th>TIME</th>
+                                    <th>BALANCE</th>
+                                    <th >EQUITY</th>
+                                    <th >PROFIT</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                {
+                                    showData().map((val, index) => {
+                                        return (
+                                        <tr>
+                                            <td>{val.time}</td>
+                                            <td>{val.balance} </td>
+                                            <td>{val.equity}</td>
+                                            <td>{val.profit.toFixed(2)} </td>
+                                        </tr>
+                                        );
+                                    })
+                                }
+                                </tbody>
+                        </table>
+
+                        <Pagination className="Pagination" current={current} onChange={onChangepage} total={posts}/>
+
+                    </div>
+                    </main>
                 </div>
-                {getLine()}
-            </div>
-            {
-                showData().map((val, index) => {
-                    return (
-                      <tr>
-                        <td>{val.time}</td>
-                        <td>{val.balance} </td>
-                        <td>{val.equity}</td>
-                        <td>{val.profit.toFixed(2)} </td>
-                      </tr>
-                    );
-                })
-            }
-            <DatePicker className="DatePicker"format="YYYY-MM-DD" value={startValue} placeholder="Start" onChange={setStartValue}/>
-            <DatePicker className="DatePicker" format="YYYY-MM-DD" value={endValue} placeholder="End" onChange={setEndValue} />
-            <Pagination className="Pagination" current={current} onChange={onChangepage} total={posts}/>
+            </div> 
         </div>
     )
 

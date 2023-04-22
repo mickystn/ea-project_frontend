@@ -1,0 +1,118 @@
+.btnPlotgraph{
+    margin-bottom: 20px;
+    
+}
+
+.btnPlotgraph .btn{
+    background-color:rgba(34, 38, 115, 0.834);
+    margin-left: 10px;
+}
+
+.btnPlotgraph .btn:hover{
+    background-color:#494b7cc8;
+}
+
+.btnallpage1 .btn-addport{
+    background-color:#222673d5;
+}
+.btnallpage1 .btn-addport:hover{
+    background-color:#494b7cc8;
+}
+
+:where(.css-dev-only-do-not-override-10ed4xt).ant-modal .ant-modal-footer .ant-btn+.ant-btn:not(.ant-dropdown-trigger){
+    background-color:#222673d5;
+
+}
+:where(.css-dev-only-do-not-override-10ed4xt).ant-modal .ant-modal-footer .ant-btn+.ant-btn:not(.ant-dropdown-trigger):hover{
+    background-color:#494b7cc8;
+
+}
+
+
+/**---------*****************getuserdata**********************--------*****/
+.landingpage_dashbord .recent-orders .Pagination{
+    text-align: right;
+    margin-top: 50px;
+    padding-bottom: 50px;
+}
+
+.landingpage_dashbord .DatePicker{
+    margin-left: 20px;
+    margin-top: 1rem;
+}
+
+
+
+
+
+.grid-container {
+    display: grid;
+    column-gap: 50px;
+    row-gap: 50px;
+    grid-template-columns: auto auto;
+}
+
+
+@media (max-width:750px) {
+    .grid-container {
+        grid-template-columns: repeat(1,1fr);
+        
+    }
+
+    .Descriptions-info{
+        width: 500px;
+    }
+    
+}
+
+@media (max-width:500px) {
+
+    .Descriptions-info{
+        width: 325px;
+    }
+    /*ขนาดของกราฟ*/
+    .recharts-surface{
+        width: 330px;
+    }
+    .chart-info{
+        width: 350px;
+        height: 400px;
+        overflow-x: hidden;
+    }
+    .landingpage_dashbord .container1 {
+        position: relative;
+        gap: 1.1rem;
+        max-width: 100%;
+        font-size: 12px;
+        color: var(--black-color);
+    }
+    
+}
+@media (max-width:450px) {
+    
+    .grid-container {
+        grid-template-columns: repeat(1,1fr);
+    }
+    .Descriptions-info {
+        width: 325px;
+    }
+    .btnPlotgraph {
+        margin-left: 0%; 
+        margin-bottom: 2px;
+    }
+    /*ขนาดของกราฟ*/
+    .recharts-surface{
+        width: 320px;
+    }
+
+    .recharts-wrapper {
+        width: 350px;
+        height: 300px;
+    }
+
+    .landingpage_dashbord .container1 .btndeletedataTranSantion{
+        font-size: 12px;
+        margin-top: 20px;
+    }
+    
+}

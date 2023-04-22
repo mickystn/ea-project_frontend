@@ -62,15 +62,17 @@ function Port(){
             <div className="container"> 
                 <main>
                 <div className="recent-orders"> 
+                <div className="inputportnumber">
+                <input  onChange={onChangePort} placeholder="input port number"  ></input>
                 <Button className ="btn" type="primary" size={"small"} onClick={addPort} >add port</Button>
-                <input onChange={onChangePort} placeholder="input port number"></input>          
+                </div>          
                 <table className="tables">
                     <thead>
                     <tr>
                         <th>ID</th>
                         <th>NAME</th>
                         <th className="mail-hidden">EMAIL</th>
-                        <th className="mail-hidden">PORT NUMBER</th>
+                        <th >PORT NUMBER</th>
 
                     </tr>
                     </thead>
@@ -82,16 +84,16 @@ function Port(){
                                 <tr>
                                 <td>{val.user_id}</td>
                                 <td>{val.user_name}</td>
-                                <td>{val.email}</td>
+                                <td className="mail-hidden">{val.email}</td>
                                 <td>{val.port_number}</td>
-                                <td> <Link className="warning" to="/Dashbord/port/transaction" state={{id:val.port_number}}>Show port</Link></td>
                                 <td> <Button className ="btn" type="text" danger size={"small"} onClick={()=>{deletePort(val.port_number)}}>delete</Button></td>
+                                <td> <Link className="warning" to="/Dashbord/port/transaction" state={{id:val.port_number}}>Show port</Link></td>
                                 </tr>
                             )
                         })
                     }
                     </tbody>
-                    </table>
+                </table>
                 </div>
                 </main>
 
