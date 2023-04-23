@@ -5,8 +5,6 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid ,Legend} from "recharts";
 import { useState,useEffect } from "react";
 import Navbar from "../component/navbar";
 import Axios from "axios";
-import { Link,useNavigate,createSearchParams } from "react-router-dom";
-import Graph from "../component/dashboard/graph";
 import { useLocation } from "react-router-dom";
 import { Button } from "antd";
 import { DatePicker, Descriptions } from "antd";
@@ -128,10 +126,8 @@ function Transaction(){
         const dataLegth = transacdata.length;
         const page = Math.ceil(dataLegth / 10);
         const post = page * 10;
-
         setPosts(post);
         setPages(page);
-        console.log("test2");
     })
     let dataArray = [];
     dataArray.push(transacdata.slice(0, 10));
@@ -201,7 +197,7 @@ function Transaction(){
                                 </tbody>
                         </table>
 
-                        <Pagination className="Pagination" current={current} onChange={onChangepage} total={posts}/>
+                        <Pagination className="Pagination" current={current} onChange={onChangepage} total={posts} simple/>
 
                     </div>
                     </main>

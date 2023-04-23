@@ -1,20 +1,19 @@
 
 import "../css/home.css";
 import "../css/dashbord.css";
-import { Button } from "antd";
 import { useState,useEffect } from "react";
 import Navbar from "../component/navbar";
 import Axios from "axios";
 import { Link,useNavigate,createSearchParams } from "react-router-dom";
-
+import { NumberOutlined} from '@ant-design/icons';
 import { useLocation } from "react-router-dom";
 import { message } from "antd";
-
+import { Button, Form, Input,Modal,} from "antd";
 
 function Port(){
     const location = useLocation();
     const [userid,setUserid]=useState(location.state.id);
-
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [allport,setAllport]=useState([]);
 
     const [addFrom,setAddfrom]=useState("");
@@ -38,20 +37,30 @@ function Port(){
         });
         window.location.reload();
     }
-
-    async function addPort(){
-        await Axios.post("https://api-ea.vercel.app/addport", {
-            Userid: userid,
-            portnumber: addFrom
-        }).then((response) => {
-            if (response.data.msg === "add port number success") {
-                message.success("Add port number success");
-            } else {
-                message.error("This port number already exists.");
-            }
-        });
-        window.location.reload();
+    const showModal = () => {
+        setIsModalOpen(true);
+    };
+    const handleOk = ()=>{
+        if(addFrom!=""){
+            Axios.post("https://api-ea.vercel.app/addport", {
+                Userid: userid,
+                portnumber: addFrom
+            }).then((response) => {
+                if (response.data.msg === "add port number success") {
+                    message.success("Add port number success");
+                } else {
+                    message.error("This port number already exists.");
+                }
+                window.location.reload();
+            });
+        }else{
+            alert("please enter port number")
+        }
+        setIsModalOpen(false);
     }
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
     function onChangePort(evt){
         setAddfrom(evt.target.value);
     }
@@ -63,8 +72,14 @@ function Port(){
                 <main>
                 <div className="recent-orders"> 
                 <div className="inputportnumber">
-                <input  onChange={onChangePort} placeholder="input port number"  ></input>
-                <Button className ="btn" type="primary" size={"small"} onClick={addPort} >add port</Button>
+                <Button className ="btn" type="primary" size={"medium"} onClick={showModal} >Add port</Button>
+                <Modal title="Add User" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+                    <Form name="normal_login" className="login-form" initialValues={{ remember: true, }}required>
+                    <Form.Item name="username" rules={[{required: true,message: 'Please input port!',},]}>
+                        <Input onChange={onChangePort} prefix={<NumberOutlined className="site-form-item-icon" />} placeholder="Username" />
+                    </Form.Item>
+                    </Form>
+                </Modal>
                 </div>          
                 <table className="tables">
                     <thead>
@@ -76,7 +91,6 @@ function Port(){
 
                     </tr>
                     </thead>
-
                     <tbody>
                     {
                         u_port.map((val)=>{
