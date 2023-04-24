@@ -31,6 +31,19 @@ function Dashbord() {
       }
     )
   },[])
+
+  async function deleteUser(user) {
+    await Axios.delete(`https://api-ea.vercel.app/deleteUser/${user}`).then(
+      (response) => {
+        console.log(response);
+        window.location.reload();
+      }
+    );
+  }
+
+
+
+
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -44,6 +57,7 @@ function Dashbord() {
         port: port,
       }).then((response) => {
         console.log(response.data.msg);
+        console.log('test');
         if (response.data.msg == "registersuccess") {
           message.success("Submit success!");
           var parms = {
@@ -65,6 +79,10 @@ function Dashbord() {
               }
             );
           window.location.reload();
+        }else if(response.data.msg == "Thisuseralreadyexists"){
+          message.warning("This Email already exists");
+        }else if(response.data.msg == "Thisportnumberalreadyexists"){
+          message.warning("This port number already exists");
         }
       })
     }else{
@@ -85,6 +103,7 @@ function Dashbord() {
   function onEmailchange(evt) {
     setEmail(evt.target.value);
   }
+
   return (
     <div>
       <Navbar></Navbar>
@@ -122,6 +141,7 @@ function Dashbord() {
                     <td>{val.user_id}</td>
                     <td>{val.user_name}</td>
                     <td>{val.email}</td>
+                    <td> <Button className ="btn" type="text" danger size={"small"} onClick={()=>{deleteUser(val.user_id)}}>delete</Button></td>
                     <td>
                       <Link className="warning" to="/Dashbord/port" state={{id:val.user_id}}>Show port</Link>
                     </td>
