@@ -17,10 +17,12 @@ function Dashbord() {
 
   const [user,setUser]=useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpenEdit, setIsModalOpenEdit] = useState(false);
 
   const [username,setUname] = useState();
   const [email,setEmail] = useState();
   const [port,setPort] = useState();
+  const [uid,setUid]=useState();
 
   if(!token) {
     window.location.replace("https://ea-project-frontend.vercel.app/Signin");
@@ -41,8 +43,27 @@ function Dashbord() {
     );
   }
 
+  async function updateUser(evt){
+    console.log(evt.user_id);
+    
+    await Axios.put("https://api-ea.vercel.app/updateuUserinfo",{
+      Userid:evt.user_id,
+      Name:username,
+      email:email
+    }).then((response)=>{
+      if (response.data.msg === "update Success") {
+        message.success("update data success");
+        window.location.reload();
+      } else if(response.data.msg === "This email already exists") {
+        message.error("This email already exists");
+      }
 
+    })
+  }
 
+  const showEdit = ()=>{
+    setIsModalOpenEdit(true);
+  }
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -92,6 +113,7 @@ function Dashbord() {
   };
   const handleCancel = () => {
     setIsModalOpen(false);
+    setIsModalOpenEdit(false);
   };
 
   function onNamechange(evt) {
@@ -103,6 +125,8 @@ function Dashbord() {
   function onEmailchange(evt) {
     setEmail(evt.target.value);
   }
+  
+  
 
   return (
     <div>
@@ -126,6 +150,8 @@ function Dashbord() {
               </Form.Item>
             </Form>
           </Modal>
+
+          
           <table className="tables">
             <thead>
               <tr>
@@ -142,6 +168,19 @@ function Dashbord() {
                     <td>{val.user_name}</td>
                     <td>{val.email}</td>
                     <td> <Button className ="btn" type="text" danger size={"small"} onClick={()=>{deleteUser(val.user_id)}}>delete</Button></td>
+                    <td>
+                    <Button className ="btn" type="text" size={"medium"} onClick={showEdit} >Edit User</Button>
+                    <Modal title="Edit User" open={isModalOpenEdit} onOk={()=>{updateUser(val)}} onCancel={handleCancel}>
+                      <Form name="normal_login" className="login-form" initialValues={{ remember: true, }}required>
+                        <Form.Item name="username" rules={[{required: true,message: 'Please input name!',},]}>
+                          <Input onChange={onNamechange} prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+                        </Form.Item>
+                        <Form.Item name="email" rules={[{required: true,message: 'Please input email!',},]}required>
+                          <Input onChange={onEmailchange} prefix={<MailOutlined  className="site-form-item-icon" />} placeholder="Email" />
+                        </Form.Item>
+                      </Form>
+                    </Modal>
+                    </td>
                     <td>
                       <Link className="warning" to="/Dashbord/port" state={{id:val.user_id}}>Show port</Link>
                     </td>
