@@ -83,7 +83,7 @@ function Port(){
                 <Modal title="Add User" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
                     <Form name="normal_login" className="login-form" initialValues={{ remember: true, }}required>
                     <Form.Item name="username" rules={[{required: true,message: 'Please input port!',},]}>
-                        <Input onChange={onChangePort} prefix={<NumberOutlined className="site-form-item-icon" />} placeholder="Username" />
+                        <Input onKeyPress={(event) => {if (!/[0-9]/.test(event.key)){event.preventDefault();}}} onChange={onChangePort} prefix={<NumberOutlined className="site-form-item-icon" />} placeholder="Username" />
                     </Form.Item>
                     </Form>
                 </Modal>

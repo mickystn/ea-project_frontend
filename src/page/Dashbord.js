@@ -38,21 +38,23 @@ function Dashbord() {
   }
 
   async function updateUser(evt){
-    console.log(evt.user_id);
-    
-    await Axios.put("https://api-ea.vercel.app/updateuUserinfo",{
-      Userid:evt.user_id,
-      Name:username,
-      email:email
-    }).then((response)=>{
-      if (response.data.msg === "update Success") {
-        message.success("update data success");
-        window.location.reload();
-      } else if(response.data.msg === "This email already exists") {
-        message.error("This email already exists");
-      }
-
-    })
+    //console.log(evt.user_id);
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    if(emailRegex.test(email)){
+      await Axios.put("https://api-ea.vercel.app/updateuUserinfo",{
+        Userid:evt.user_id,
+        Name:username,
+        email:email
+      }).then((response)=>{
+        if (response.data.msg === "update Success") {
+          message.success("update data success");
+          window.location.reload();
+        } else if(response.data.msg === "This email already exists") {
+          message.error("This email already exists");
+        }
+  
+      })
+    }
   }
 
   const showEdit = ()=>{
@@ -63,7 +65,9 @@ function Dashbord() {
     setIsModalOpen(true);
   };
   const handleOk = () => {
-    if(username!="" && email!="" && port!=""){
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+
+    if(username!="" && email!="" && port!="" &&emailRegex.test(email) ){
       const randomPassword = Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
       Axios.post("https://api-ea.vercel.app/register", {
         username: username,
@@ -145,11 +149,11 @@ function Dashbord() {
               <Form.Item name="username" rules={[{required: true,message: 'Please input name!',},]}>
                 <Input onChange={onNamechange} prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
               </Form.Item>
-              <Form.Item name="email" rules={[{required: true,message: 'Please input email!',},]}required>
+              <Form.Item name="email" rules={[{required: true,message: 'Please input email!',},{type: "email",message: "The input is not valid Email!",},]}required>
                 <Input onChange={onEmailchange} prefix={<MailOutlined  className="site-form-item-icon" />} placeholder="Email" />
               </Form.Item>
               <Form.Item name="port number" rules={[{required: true,message: 'Please input port number!',},]} required>
-                <Input onChange={onPortchange} prefix={<NumberOutlined className="site-form-item-icon" />} placeholder="Port Number" />
+                <Input type='text'onKeyPress={(event) => {if (!/[0-9]/.test(event.key)){event.preventDefault();}}}onChange={onPortchange} prefix={<NumberOutlined className="site-form-item-icon" />} placeholder="Port Number" />
               </Form.Item>
             </Form>
           </Modal>
@@ -189,7 +193,7 @@ function Dashbord() {
                         <Form.Item name="username" rules={[{required: true,message: 'Please input name!',},]}>
                           <Input onChange={onNamechange} prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
                         </Form.Item>
-                        <Form.Item name="email" rules={[{required: true,message: 'Please input email!',},]}required>
+                        <Form.Item name="email" rules={[{required: true,message: 'Please input email!',},{type: "email",message: "The input is not valid Email!",},]}required>
                           <Input onChange={onEmailchange} prefix={<MailOutlined  className="site-form-item-icon" />} placeholder="Email" />
                         </Form.Item>
                       </Form>
