@@ -80,10 +80,10 @@ function Port(){
                 <div className="recent-orders"> 
                 <div className="inputportnumber">
                 <Button className ="btn" type="primary" size={"medium"} onClick={showModal} >Add port</Button>
-                <Modal title="Add User" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+                <Modal title="Add Port Number" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
                     <Form name="normal_login" className="login-form" initialValues={{ remember: true, }}required>
                     <Form.Item name="username" rules={[{required: true,message: 'Please input port!',},]}>
-                        <Input onKeyPress={(event) => {if (!/[0-9]/.test(event.key)){event.preventDefault();}}} onChange={onChangePort} prefix={<NumberOutlined className="site-form-item-icon" />} placeholder="Username" />
+                        <Input onKeyPress={(event) => {if (!/[0-9]/.test(event.key)){event.preventDefault();}}} onChange={onChangePort} prefix={<NumberOutlined className="site-form-item-icon" />} placeholder="Port Number" />
                     </Form.Item>
                     </Form>
                 </Modal>

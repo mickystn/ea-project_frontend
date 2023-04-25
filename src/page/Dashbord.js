@@ -40,7 +40,7 @@ function Dashbord() {
   async function updateUser(evt){
     //console.log(evt.user_id);
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-    if(emailRegex.test(email)){
+    if(emailRegex.test(email)&& username!=""){
       await Axios.put("https://api-ea.vercel.app/updateuUserinfo",{
         Userid:evt.user_id,
         Name:username,
