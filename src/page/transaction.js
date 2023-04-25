@@ -158,27 +158,8 @@ function Transaction(){
             <div className="landingpage_dashbord"> 
                 <div className="container"> 
                     <main>
-                    {userData.map((obj) => {
-                    return (
-                        <div className="Descriptions-info">
-                        <Descriptions title="User Info">
-                            <Descriptions.Item label="Username" >
-                            {obj.user_name}
-                            </Descriptions.Item>
-                            <Descriptions.Item label="Email" span={2}>
-                            {obj.email}
-                            </Descriptions.Item>
-                            <Descriptions.Item label="Port Number" span={1}>
-                            {obj.port_number}
-                            </Descriptions.Item>
-                            <Descriptions.Item label="Profit">
-                            {(profit[profit.length - 1] - profit[0]).toFixed(2)}
-                            </Descriptions.Item>
-                        </Descriptions>
-                        </div>
-                    );
-                    })}
                     <div className="recent-orders"> 
+                        <div className="grid-container"> 
                         <div className="chart-info">
                             <div className="btnPlotgraph">
                             <Button className ="btn" type="primary" size={"small"} onClick={()=>{setGraphval("profit")}}>
@@ -190,6 +171,30 @@ function Transaction(){
                             </div>
                             {getLine()}
                         </div>
+
+                        {userData.map((obj) => {
+                        return (
+                            <div className="Descriptions-info">
+                            <Descriptions title="User Info">
+                                <Descriptions.Item label="Username" >
+                                {obj.user_name}
+                                </Descriptions.Item>
+                                <Descriptions.Item label="Email" span={2}>
+                                {obj.email}
+                                </Descriptions.Item>
+                                <Descriptions.Item label="Port Number" span={2}>
+                                {obj.port_number}
+                                </Descriptions.Item>
+                                <Descriptions.Item label="Profit">
+                                {(profit[profit.length - 1] - profit[0]).toFixed(2)}
+                                </Descriptions.Item>
+                            </Descriptions>
+                            </div>
+                        );
+                        })}
+
+                        </div>
+
 
                         <DatePicker className="DatePicker"format="YYYY-MM-DD" value={startValue} placeholder="Start" onChange={setStartValue}/>
                         <DatePicker className="DatePicker" format="YYYY-MM-DD" value={endValue} placeholder="End" onChange={setEndValue} />
