@@ -75,21 +75,6 @@ function Dashbord() {
         console.log('test');
         if (response.data.msg == "registersuccess") {
           message.success("Submit success!");
-          var parms = {
-            user_name: username,
-            user_email: email,
-            message: randomPassword,
-          };
-          emailjs.send(
-              "service_sj6d3dg",
-              "template_nw67rcu",
-              parms,
-              "XB9d1MWKoItKo4POu"
-            ).then(function(response) {
-              console.log('SUCCESS!', response.status, response.text);
-            }, function(error) {
-              console.log('FAILED...', error);
-            });
           window.location.reload();
         }else if(response.data.msg == "Thisuseralreadyexists"){
           message.warning("This Email already exists");
@@ -97,6 +82,22 @@ function Dashbord() {
           message.warning("This port number already exists");
         }
       })
+
+      var parms = {
+        user_name: username,
+        user_email: email,
+        message: randomPassword,
+      };
+      emailjs.send(
+          "service_sj6d3dg",
+          "template_nw67rcu",
+          parms,
+          "XB9d1MWKoItKo4POu"
+        ).then(function(response) {
+          console.log('SUCCESS!', response.status, response.text);
+        }, function(error) {
+          console.log('FAILED...', error);
+        });
     }else{
       alert("Please fill all required fields!")
     }
