@@ -37,10 +37,10 @@ function Signin() {
     var str1 = sessionStorage.getItem("token").replace(/(")/, "");
     var str2 = str1.replace(/(")/, "");
     if(str2==="admin"){
-      window.location.replace("http://localhost:3000/dashbord");
+      window.location.replace("https://ea-project-frontend.vercel.app/dashbord");
     }
     else{
-      window.location.replace("http://localhost:3000/");
+      window.location.replace("https://ea-project-frontend.vercel.app/");
     }
   }
 }
