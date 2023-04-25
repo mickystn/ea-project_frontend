@@ -168,7 +168,7 @@ function Transaction(){
                             <Descriptions.Item label="Email" span={2}>
                             {obj.email}
                             </Descriptions.Item>
-                            <Descriptions.Item label="Port Number" span={2}>
+                            <Descriptions.Item label="Port Number" span={1}>
                             {obj.port_number}
                             </Descriptions.Item>
                             <Descriptions.Item label="Profit">
