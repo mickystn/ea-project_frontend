@@ -1,13 +1,12 @@
 
 import "../css/home.css";
 import "../css/dashbord.css";
-import { Button, Form, Input,Modal,} from "antd";
+import { Button, Form, Input,Modal, message, Popconfirm} from "antd";
 import { useState,useEffect } from "react";
 import Navbar from "../component/navbar";
 import Axios from "axios";
 import { Link,useNavigate,createSearchParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { message } from "antd";
 import { UserOutlined,NumberOutlined ,MailOutlined} from '@ant-design/icons';
 import useToken from "./useToken";
 import emailjs from "@emailjs/browser";
@@ -35,12 +34,7 @@ function Dashbord() {
   },[])
 
   async function deleteUser(user) {
-    await Axios.delete(`https://api-ea.vercel.app/deleteUser/${user}`).then(
-      (response) => {
-        console.log(response);
-        window.location.reload();
-      }
-    );
+    
   }
 
   async function updateUser(evt){
@@ -125,8 +119,19 @@ function Dashbord() {
   function onEmailchange(evt) {
     setEmail(evt.target.value);
   }
-  
-  
+  async function confirm (user){
+    console.log(user);
+    await Axios.delete(`https://api-ea.vercel.app/deleteUser/${user}`).then(
+      (response) => {
+        console.log(response);
+        message.success('Delete success');
+        window.location.reload();
+      }
+    );
+  };
+  const cancel = (e) => {
+    message.error('Cancel Delete');
+  };
 
   return (
     <div>
@@ -167,7 +172,18 @@ function Dashbord() {
                     <td>{val.user_id}</td>
                     <td>{val.user_name}</td>
                     <td>{val.email}</td>
-                    <td> <Button className ="btn" type="text" danger size={"small"} onClick={()=>{deleteUser(val.user_id)}}>delete</Button></td>
+                    <td>
+                    <Popconfirm
+                      title="Delete the user"
+                      description="Are you sure to delete this user?"
+                      onConfirm={()=>{confirm(val.user_id)}}
+                      onCancel={cancel}
+                      okText="Yes"
+                      cancelText="No"
+                    >
+                      <Button className ="btn" type="text" danger size={"small"}>delete</Button>
+                    </Popconfirm>
+                    </td>
                     <td>
                     <Button className ="btn" type="text" size={"medium"} onClick={showEdit} >Edit User</Button>
                     <Modal title="Edit User" open={isModalOpenEdit} onOk={()=>{updateUser(val)}} onCancel={handleCancel}>

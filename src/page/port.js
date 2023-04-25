@@ -7,7 +7,7 @@ import Axios from "axios";
 import { Link,useNavigate,createSearchParams } from "react-router-dom";
 import { NumberOutlined} from '@ant-design/icons';
 import { useLocation } from "react-router-dom";
-import { message } from "antd";
+import { message , Popconfirm} from "antd";
 import { Button, Form, Input,Modal,} from "antd";
 
 function Port(){
@@ -29,13 +29,7 @@ function Port(){
     }) 
     //delete method
     async function deletePort(port){
-        await Axios.delete(`https://api-ea.vercel.app/deletetran/${port}`).then((res) => {
-            console.log(res);
-        });
-        await Axios.delete(`https://api-ea.vercel.app/deleteOneport/${port}`).then((res) => {
-            console.log(res);
-        });
-        window.location.reload();
+        
     }
     const showModal = () => {
         setIsModalOpen(true);
@@ -64,6 +58,19 @@ function Port(){
     function onChangePort(evt){
         setAddfrom(evt.target.value);
     }
+
+    async function confirm(port){
+        await Axios.delete(`https://api-ea.vercel.app/deletetran/${port}`).then((res) => {
+            console.log(res);
+        });
+        await Axios.delete(`https://api-ea.vercel.app/deleteOneport/${port}`).then((res) => {
+            console.log(res);
+        });
+        window.location.reload();
+    }
+    const cancel = (e) => {
+        message.error('Cancel Delete');
+    };
     return (
         <div>
             <Navbar></Navbar>
@@ -100,7 +107,18 @@ function Port(){
                                 <td>{val.user_name}</td>
                                 <td className="mail-hidden">{val.email}</td>
                                 <td>{val.port_number}</td>
-                                <td> <Button className ="btn" type="text" danger size={"small"} onClick={()=>{deletePort(val.port_number)}}>delete</Button></td>
+                                <td> 
+                                <Popconfirm
+                                    title="Delete the port"
+                                    description="Are you sure to delete this port?"
+                                    onConfirm={()=>{confirm(val.port_number)}}
+                                    onCancel={cancel}
+                                    okText="Yes"
+                                    cancelText="No"
+                                >
+                                    <Button className ="btn" type="text" danger size={"small"} >delete</Button>
+                                </Popconfirm>
+                                </td>
                                 <td> <Link className="warning" to="/Dashbord/port/transaction" state={{id:val.port_number}}>Show port</Link></td>
                                 </tr>
                             )
