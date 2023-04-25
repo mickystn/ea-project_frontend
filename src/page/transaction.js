@@ -5,8 +5,6 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid ,Legend} from "recharts";
 import { useState,useEffect } from "react";
 import Navbar from "../component/navbar";
 import Axios from "axios";
-import { Link,useNavigate,createSearchParams } from "react-router-dom";
-import Graph from "../component/dashboard/graph";
 import { useLocation } from "react-router-dom";
 import { Button } from "antd";
 import { DatePicker, Descriptions } from "antd";
@@ -16,7 +14,7 @@ import { Pagination } from "antd";
 function Transaction(){
     const location = useLocation();
     const [userport,setUserport]=useState(location.state.id);
-
+    const [userData, setUserData] = useState([]);
     const [alltrans,setAlltrans]=useState([]);
     const [graphval,setGraphval] = useState("profit");
     //Pagination
@@ -35,6 +33,9 @@ function Transaction(){
         Axios.get("https://api-ea.vercel.app/transaction").then((res)=>{
             setAlltrans(res.data)
         })
+        Axios.get(`https://api-ea.vercel.app/userid/${location.state.id}`).then((res) => {
+            setUserData(res.data);
+        });
     },[])
     // filter พอร์ตตรงกันเท่านั้น
     const u_trans = alltrans.filter((obj)=>{
@@ -103,7 +104,7 @@ function Transaction(){
               <CartesianGrid  strokeDasharray="3 3" />
               <XAxis dataKey="date" />
               <YAxis type="number"></YAxis>
-              <Line type="monotone" dataKey="profit" stroke="#8884d8" activeDot={{ r: 8 }}/>
+              <Line type="monotone" dataKey="profit" stroke="#8884d8" dot={false}/>
             </LineChart>
             
           )
@@ -115,8 +116,8 @@ function Transaction(){
               <XAxis dataKey="date" />
               <Legend />
               <YAxis type="number"  domain={[Math.min(...balance) - 100,Math.max(...balance) + 100,]}></YAxis>
-              <Line type="monotone" dataKey="equity" stroke="#8884d8" activeDot={{ r: 8 }}/>
-              <Line type="monotone" dataKey="balance" stroke="#210062" activeDot={{ r: 8 }}/>
+              <Line type="monotone" dataKey="equity" stroke="#8884d8" dot={false}/>
+              <Line type="monotone" dataKey="balance" stroke="#210062" dot={false}/>
             </LineChart>
             
           )
@@ -128,10 +129,8 @@ function Transaction(){
         const dataLegth = transacdata.length;
         const page = Math.ceil(dataLegth / 10);
         const post = page * 10;
-
         setPosts(post);
         setPages(page);
-        console.log("test2");
     })
     let dataArray = [];
     dataArray.push(transacdata.slice(0, 10));
@@ -159,6 +158,26 @@ function Transaction(){
             <div className="landingpage_dashbord"> 
                 <div className="container"> 
                     <main>
+                    {userData.map((obj) => {
+                    return (
+                        <div className="Descriptions-info">
+                        <Descriptions title="User Info">
+                            <Descriptions.Item label="Username" >
+                            {obj.user_name}
+                            </Descriptions.Item>
+                            <Descriptions.Item label="Email" span={2}>
+                            {obj.email}
+                            </Descriptions.Item>
+                            <Descriptions.Item label="Port Number" span={2}>
+                            {obj.port_number}
+                            </Descriptions.Item>
+                            <Descriptions.Item label="Profit">
+                            {(profit[profit.length - 1] - profit[0]).toFixed(2)}
+                            </Descriptions.Item>
+                        </Descriptions>
+                        </div>
+                    );
+                    })}
                     <div className="recent-orders"> 
                         <div className="chart-info">
                             <div className="btnPlotgraph">
@@ -201,7 +220,7 @@ function Transaction(){
                                 </tbody>
                         </table>
 
-                        <Pagination className="Pagination" current={current} onChange={onChangepage} total={posts}/>
+                        <Pagination className="Pagination" current={current} onChange={onChangepage} total={posts} simple/>
 
                     </div>
                     </main>
