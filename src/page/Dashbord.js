@@ -85,14 +85,11 @@ function Dashbord() {
               "template_nw67rcu",
               parms,
               "F0sqlbUWHHa7eDrUX"
-            ).then(
-              (result) => {
-                console.log(result.text);
-              },
-              (error) => {
-                console.log(error.text);
-              }
-            );
+            ).then(function(response) {
+              console.log('SUCCESS!', response.status, response.text);
+            }, function(error) {
+              console.log('FAILED...', error);
+            });
           window.location.reload();
         }else if(response.data.msg == "Thisuseralreadyexists"){
           message.warning("This Email already exists");
