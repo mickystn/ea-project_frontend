@@ -76,6 +76,7 @@
     }
     .chart-info{
         width: 350px;
+        height: 350px;
         overflow-x: hidden;
     }
     .landingpage_dashbord .container1 {
