@@ -162,7 +162,7 @@ function Dashbord() {
               <tr>
                 <th>ID</th>
                 <th>NAME</th>
-                <th >EMAIL</th>
+                <th className="mail-hidden">EMAIL</th>
               </tr>
             </thead>
             <tbody>
@@ -171,7 +171,7 @@ function Dashbord() {
                   <tr>
                     <td>{val.user_id}</td>
                     <td>{val.user_name}</td>
-                    <td>{val.email}</td>
+                    <td className="mail-hidden">{val.email}</td>
                     <td>
                     <Popconfirm
                       title="Delete the user"
